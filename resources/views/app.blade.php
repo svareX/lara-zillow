@@ -7,11 +7,11 @@
 
     <title>House market</title>
     @routes
-    @vite(['resources/js/app.js', 'resources/css/app.css'])
+    @vite('resources/js/app.js')
     @inertiaHead
 </head>
 
-<body>
+<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-300">
     @inertia
 </body>
 

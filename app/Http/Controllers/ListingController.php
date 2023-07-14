@@ -32,14 +32,14 @@ class ListingController extends Controller
     {
         Listing::create(
             $request->validate([
-                'beds' => 'required|integer|min:0|max:20',
-                'baths' => 'required|integer|min:0|max:20',
-                'area' => 'required|integer|min:15|max:1500',
+                'beds' => 'required|integer|min:0|max:255',
+                'baths' => 'required|integer|min:0|max:255',
+                'area' => 'required|integer|min:15|max:65535',
                 'city' => 'required',
                 'code' => 'required',
                 'street' => 'required',
                 'street_nr' => 'required|min:1|max:1000',
-                'price' => 'required|integer|min:1|max:20000000',
+                'price' => 'required|integer|min:1|max:4294967295',
             ])
         );
         return redirect()->route('listing.index')
@@ -73,14 +73,14 @@ class ListingController extends Controller
     {
         $listing->update(
             $request->validate([
-                'beds' => 'required|integer|min:0|max:20',
-                'baths' => 'required|integer|min:0|max:20',
-                'area' => 'required|integer|min:15|max:1500',
+                'beds' => 'required|integer|min:0|max:255',
+                'baths' => 'required|integer|min:0|max:255',
+                'area' => 'required|integer|min:15|max:65535',
                 'city' => 'required',
                 'code' => 'required',
                 'street' => 'required',
                 'street_nr' => 'required|min:1|max:1000',
-                'price' => 'required|integer|min:1|max:20000000',
+                'price' => 'required|integer|min:1|max:4294967295',
             ])
         );
         return redirect()->route('listing.index')

@@ -11,14 +11,14 @@ export default defineConfig({
     }),
     vue({
       template: {
-        base:null,
-        includeAbsolute:false,
+        base: null,
+        includeAbsolute: false,
       },
     }),
   ],
   resolve: {
     alias: {
-      ziggy: path.resolve('/vendor/tightenco/ziggy/dist/vue.es.js'),
+      ziggy: path.resolve('vendor/tightenco/ziggy/dist/vue.es.js'),
     },
   },
 })
