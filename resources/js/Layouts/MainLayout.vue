@@ -1,11 +1,15 @@
 <template>
-    <div>
-        <h3>Time spent here: {{ timer }}</h3>
-        <Link href="/">Main page</Link>
-        <Link href="/show">Show page</Link>
-    </div>
+  <div>
+    <h3>Time spent here: {{ timer }}</h3>
+    <Link href="/">
+      Main page
+    </Link>
+    <Link href="/show">
+      Show page
+    </Link>
+  </div>
 
-    <slot>Empty</slot>
+  <slot>Empty</slot>
 </template>
 
 <script setup>

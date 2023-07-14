@@ -1,5 +1,5 @@
 <template>
-    <span>Main page</span>
+  <span>Main page</span>
 </template>
 
 <script setup>
