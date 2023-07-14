@@ -1,11 +1,11 @@
 <template>
   <div>
     <h3>Time spent here: {{ timer }}</h3>
-    <Link href="/">
-      Main page
+    <Link href="/listing">
+      Listings
     </Link>
-    <Link href="/show">
-      Show page
+    <Link href="/listing/create">
+      New listing
     </Link>
   </div>
 
