@@ -84,7 +84,7 @@ const form = useForm({
   street_nr: null,
   price: 0,
 })
-const store = () => form.post('/listing')
+const store = () => form.post(route('listing.store'))
 </script>
 
   <style scoped>
