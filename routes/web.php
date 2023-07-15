@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [ListingController::class, 'index']);
 
-Route::resource('listing', ListingController::class);
+Route::resource('listing', ListingController::class)->except('index', 'show')->middleware('auth');
+Route::resource('listing', ListingController::class)->only('index', 'show');
 
 Route::get('login', [LoginController::class, 'create'])->name('login');
 Route::post('login', [LoginController::class, 'store'])->name('login.store');
