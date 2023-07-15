@@ -11,9 +11,13 @@ class ListingPolicy
     /**
      * Determine whether the user is an admin.
      */
-    public function before(?User $user): bool
+    public function before(?User $user, $action): bool|null
     {
-        return $user?->is_admin;
+        if ($user?->is_admin) {
+            return true;
+        }
+
+        return null;
     }
     /**
      * Determine whether the user can view any models.
