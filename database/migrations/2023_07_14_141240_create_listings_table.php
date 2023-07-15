@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -21,6 +22,7 @@ return new class extends Migration
             $table->tinyText('street');
             $table->tinyText('street_nr');
             $table->unsignedInteger('price');
+            $table->foreignIdFor(User::class, 'user_id');
             $table->timestamps();
         });
     }
