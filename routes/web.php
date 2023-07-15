@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Controllers\IndexController;
+use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [ListingController::class, 'index']);
 
 Route::resource('listing', ListingController::class);
+
+Route::get('login', [LoginController::class, 'create'])->name('login');
+Route::post('login', [LoginController::class, 'store'])->name('login.store');
+Route::delete('logout', [LoginController::class, 'destroy'])->name('logout');
+Route::get('register', [RegisterController::class, 'create'])->name('register');
+Route::post('register', [RegisterController::class, 'store'])->name('register.store');

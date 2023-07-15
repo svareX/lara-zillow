@@ -35,7 +35,7 @@
 
       <div class="col-span-2">
         <label class="label">Post Code</label>
-        <input v-model="form.code" type="text" class="input" />
+        <input v-model="form.code" type="number" class="input" />
         <div v-if="form.errors.code" class="input-error">
           {{ form.errors.code }}
         </div>
