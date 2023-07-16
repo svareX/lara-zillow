@@ -12,7 +12,7 @@
 <script setup>
 import Listing from '@/Pages/Listing/Components/Index/Listing.vue'
 import Pagination from '@/Components/UI/Pagination.vue'
-import ListingFilters from '@/Components/ListingFilters.vue'
+import ListingFilters from '@/Pages/Listing/Components/Index/ListingFilters.vue'
 
 defineProps({
   listings: Object,

@@ -9,8 +9,8 @@
           <Link :href="route('listing.index')">House market</Link>
         </div>
         <div v-if="user" class="flex items-center gap-4">
-          <span class="text-sm">{{ user.name }}</span>
-          <Link :href="route('listing.create')" class="btn-primary">New Listing</Link>
+          <Link :href="route('realtor.listing.index')" class="text-sm">{{ user.name }}</Link>
+          <Link :href="route('realtor.listing.create')" class="btn-primary">New Listing</Link>
           <Link :href="route('logout')" method="delete" as="button">Log out</Link>
         </div>
         <div v-else>
