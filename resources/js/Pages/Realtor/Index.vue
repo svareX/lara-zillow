@@ -14,26 +14,31 @@
 
           <ListingAddress :listing="listing" />
         </div>
-        <div class="flex items-center gap-1 text-gray-600 dark:text-gray-300">
-          <a class="btn-outline text-xs font-medium" :href="route('listing.show', listing)" target="_blank">Preview</a>
-          <Link class="btn-outline text-xs font-medium" :href="route('realtor.listing.edit', listing)">Edit</Link>
-          <Link
-            v-if="!listing.deleted_at"
-            class="btn-outline text-xs font-medium"
-            :href="route('realtor.listing.destroy', { listing: listing.id })"
-            as="button" method="delete"
-          >
-            Delete
-          </Link>
-          <Link
-            v-else
-            class="btn-outline text-xs font-medium"
-            :href="route('realtor.listing.restore', { listing: listing.id })"
-            as="button"
-            method="put"
-          >
-            Restore
-          </Link>
+        <div class="flex flex-col items-center gap-1 text-gray-600 dark:text-gray-300">
+          <div>
+            <a class="btn-outline text-xs font-medium" :href="route('listing.show', listing)" target="_blank">Preview</a>
+            <Link class="btn-outline text-xs font-medium" :href="route('realtor.listing.edit', listing)">Edit</Link>
+            <Link
+              v-if="!listing.deleted_at"
+              class="btn-outline text-xs font-medium"
+              :href="route('realtor.listing.destroy', listing)"
+              as="button" method="delete"
+            >
+              Delete
+            </Link>
+            <Link
+              v-else
+              class="btn-outline text-xs font-medium"
+              :href="route('realtor.listing.restore', listing)"
+              as="button"
+              method="put"
+            >
+              Restore
+            </Link>
+          </div>
+          <div>
+            <Link :href="route('realtor.listing.image.create', listing)" class="btn-outline text-sm">Images ({{ listing.images_count }})</Link>
+          </div>
         </div>
       </div>
     </Box>

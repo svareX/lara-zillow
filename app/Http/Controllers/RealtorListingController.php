@@ -32,6 +32,7 @@ class RealtorListingController extends Controller
                 'listings' => auth()->user()
                     ->listings()
                     ->filter($filters)
+                    ->withCount('images')
                     ->paginate(10)
                     ->withQueryString()
             ]
