@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Auth;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 
 class RegisterController extends Controller
@@ -28,6 +29,7 @@ class RegisterController extends Controller
                 'password' => 'required|confirmed',
             ])
         );
+        event(new Registered($user));
         Auth::login($user);
         return redirect()->route('listing.index')
             ->with('success', 'Account created!');
