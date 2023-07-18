@@ -40,7 +40,7 @@ class ListingController extends Controller
      */
     public function show(Listing $listing)
     {
-        $listing->load(['images']);
+        $listing->load(['images', 'owner']);
         $offer = !Auth::user() ?
             null : $listing->offers()->byMe()->first();
 

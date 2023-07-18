@@ -11,6 +11,22 @@
             class="text-indigo-600 dark:text-indigo-400"
           >listing</Link> was made
         </span>
+
+        <span v-if="notification.type === 'App\\Notifications\\OfferAccepted'">
+          Offer <Price :price="notification.data.amount" /> for
+          <Link
+            :href="route('realtor.listing.show', { listing: notification.data.listing_id })"
+            class="text-indigo-600 dark:text-indigo-400"
+          >listing</Link> has been accepted
+        </span>
+
+        <span v-if="notification.type === 'App\\Notifications\\OfferRejected'">
+          Offer <Price :price="notification.data.amount" /> for
+          <Link
+            :href="route('realtor.listing.show', { listing: notification.data.listing_id })"
+            class="text-indigo-600 dark:text-indigo-400"
+          >listing</Link> has been rejected
+        </span>
       </div>
       <div>
         <Link

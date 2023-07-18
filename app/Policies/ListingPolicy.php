@@ -77,4 +77,12 @@ class ListingPolicy
     {
         return $listing->user_id === $user->id;
     }
+
+    /**
+     * Determine whether the user can make an offer for this listing.
+     */
+    public function offer(User $user, Listing $listing): bool
+    {
+        return $listing->sold_at === null && $listing->user_id !== $user->id;
+    }
 }

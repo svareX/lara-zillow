@@ -8,7 +8,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class OfferMade extends Notification implements ShouldQueue
+class OfferRejected extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -36,8 +36,8 @@ class OfferMade extends Notification implements ShouldQueue
     public function toMail(object $notifiable): MailMessage
     {
         return (new MailMessage)
-            ->line("A offer of $ {$this->offer->amount} has been made on your listing.")
-            ->action('Look at the offers, for that listing', route('realtor.listing.show', $this->offer->listing_id))
+            ->line("Unfortunatelly your offer of $ {$this->offer->amount} has been rejected.")
+            ->action('Find a new listing', route('listing.index'))
             ->line('Thank you for using our application!');
     }
 

@@ -65,8 +65,10 @@
           </div>
         </div>
       </Box>
-      <MakeOffer v-if="user && !offerMade" :listing-id="listing.id" :price="listing.price" />
-      <OfferMade v-if="user && offerMade" :offer="offerMade" />
+      <div v-if="user.id !== listing.owner.id">
+        <MakeOffer v-if="user && !offerMade" :listing-id="listing.id" :price="listing.price" />
+        <OfferMade v-if="user && offerMade" :offer="offerMade" />
+      </div>
     </div>
   </div>
 </template>
