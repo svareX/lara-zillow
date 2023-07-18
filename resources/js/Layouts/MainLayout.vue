@@ -17,8 +17,8 @@
               </div>
             </Link>
           </div>
-          <Link :href="route('realtor.listing.index')" class="text-sm">{{ user.name }}</Link>
           <Link :href="route('realtor.listing.create')" class="btn-primary">New Listing</Link>
+          <Link :href="route('realtor.listing.index')" class="text-sm">{{ user.name }}</Link>
           <Link :href="route('logout')" method="delete" as="button">Log out</Link>
         </div>
         <div v-else>
