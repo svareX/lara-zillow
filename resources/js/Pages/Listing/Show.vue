@@ -14,7 +14,13 @@
         <template #header>
           Basic info
         </template>
-        <Price :price="listing.price" class="text-2xl font-bold" />
+        <Price :price="listing.price" class="text-2xl font-bold mr-3" />
+        <div
+          v-if="listing.sold_at != null"
+          class="text-xs font-bold uppercase border border-dashed p-1 relative bottom-1  border-green-300 text-green-500 dark:border-green-600 dark:text-green-600 inline-block rounded-md"
+        >
+          sold
+        </div>
         <ListingSpace :listing="listing" class="text-lg" />
         <ListingAddress :listing="listing" class="text-gray-500" />
       </Box>
