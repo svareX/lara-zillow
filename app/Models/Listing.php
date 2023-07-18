@@ -22,6 +22,7 @@ class Listing extends Model
         'street',
         'street_nr',
         'price',
+        'sold_at',
     ];
 
     protected $sortable = [
@@ -37,6 +38,11 @@ class Listing extends Model
     public function images(): HasMany
     {
         return $this->hasMany(ListingImage::class);
+    }
+
+    public function offers(): HasMany
+    {
+        return $this->hasMany(Offer::class, 'listing_id');
     }
 
     public function scopeMostRecent(Builder $query): Builder
@@ -74,5 +80,10 @@ class Listing extends Model
                 ? $query :
                 $query->orderBy($value, $filters['order'] ?? 'desc')
         );
+    }
+
+    public function scopeWithoutSold(Builder $query): Builder
+    {
+        return $query->whereNull('sold_at');
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Listing;
+use Auth;
 use Illuminate\Http\Request;
 
 class ListingController extends Controller
@@ -28,6 +29,7 @@ class ListingController extends Controller
             'filters' => $filters,
             'listings' => Listing::mostRecent()
                 ->filter($filters)
+                ->withoutSold()
                 ->paginate(9)
                 ->withQueryString()
         ]);
@@ -38,8 +40,16 @@ class ListingController extends Controller
      */
     public function show(Listing $listing)
     {
-        return inertia('Listing/Show', [
-            'listing' => $listing->load(['images'])
-        ]);
+        $listing->load(['images']);
+        $offer = !Auth::user() ?
+            null : $listing->offers()->byMe()->first();
+
+        return inertia(
+            'Listing/Show',
+            [
+                'listing' => $listing,
+                'offerMade' => $offer
+            ]
+        );
     }
 }

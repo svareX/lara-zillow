@@ -32,7 +32,10 @@ class ListingPolicy
      */
     public function view(?User $user, Listing $listing): bool
     {
-        return true;
+        if ($listing->user_id === $user?->id) {
+            return true;
+        }
+        return $listing->sold_at === null;
     }
 
     /**
@@ -48,7 +51,7 @@ class ListingPolicy
      */
     public function update(User $user, Listing $listing): bool
     {
-        return $listing->user_id === $user->id;
+        return $listing->sold_at === null && ($listing->user_id === $user->id);
     }
 
     /**

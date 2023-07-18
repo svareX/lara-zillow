@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\ListingOfferController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RealtorListingAcceptOfferController;
 use App\Http\Controllers\RealtorListingController;
 use App\Http\Controllers\RealtorListingImageController;
 use Illuminate\Support\Facades\Route;
@@ -27,9 +29,11 @@ Route::get('register', [RegisterController::class, 'create'])->name('register');
 Route::post('register', [RegisterController::class, 'store'])->name('register.store');
 
 Route::resource('listing', ListingController::class)->only('index', 'show');
+Route::resource('listing.offer', ListingOfferController::class)->middleware('auth')->only(['store']);
 
 Route::prefix('realtor')->as('realtor.')->middleware('auth')->group(function () {
     Route::name('listing.restore')->put('listing/{listing}/restore', [RealtorListingController::class, 'restore'])->withTrashed();
-    Route::resource('listing', RealtorListingController::class)->except(['show'])->withTrashed();
+    Route::resource('listing', RealtorListingController::class)->withTrashed();
     Route::resource('listing.image', RealtorListingImageController::class)->only(['create', 'store', 'destroy']);
+    Route::put('offer/{offer}/accept', RealtorListingAcceptOfferController::class)->name('offer.accept');
 });
