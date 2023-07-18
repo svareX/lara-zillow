@@ -1,5 +1,5 @@
 <template>
-  <form @submit.prevent="filter">
+  <form>
     <div class="mb-8 mt-4 flex flex-wrap gap-2">
       <div class="flex flex-nowrap items-center">
         <input
@@ -39,35 +39,19 @@
           class="input-filter-r w-28 number"
         />
       </div>
-
-      <button type="submit" class="btn-normal">Filter</button>
-      <button type="reset" @click="clear">Clear</button>
+      <button type="reset" class="btn-outline" @click="clear">Clear filters</button>
     </div>
   </form>
 </template>
 
 <script setup>
-import {useForm} from '@inertiajs/vue3'
+import {router} from '@inertiajs/vue3'
+import { reactive, watch } from 'vue'
+import { debounce } from 'lodash'
+
 const props = defineProps({
   filters: Object,
 })
-const filterForm = useForm({
-  priceFrom: props.filters.priceFrom ?? null,
-  priceTo: props.filters.priceTo ?? null,
-  beds: props.filters.beds ?? null,
-  baths: props.filters.baths ?? null,
-  areaFrom: props.filters.areaFrom ?? null,
-  areaTo: props.filters.areaTo ?? null,
-})
-const filter = () => {
-  filterForm.get(
-    route('listing.index'),
-    {
-      preserveState: true,
-      preserveScroll: true,
-    },
-  )
-}
 const clear = () => {
   filterForm.priceFrom = null
   filterForm.priceTo = null
@@ -75,6 +59,22 @@ const clear = () => {
   filterForm.baths = null
   filterForm.areaFrom = null
   filterForm.areaTo = null
-  filter()
 }
+
+
+const filterForm = reactive({
+  priceFrom: props.filters.priceFrom ?? null,
+  priceTo: props.filters.priceTo ?? null,
+  beds: props.filters.beds ?? null,
+  baths: props.filters.baths ?? null,
+  areaFrom: props.filters.areaFrom ?? null,
+  areaTo: props.filters.areaTo ?? null,
+})
+watch(
+  filterForm, debounce(() => router.get(
+    route('listing.index'),
+    filterForm,
+    { preserveState: true, preserveScroll: true },
+  ), 1111),
+)
 </script>
