@@ -2,7 +2,10 @@
   <h1 class="text-3xl mb-4">Your Notifications</h1>
 
   <section v-if="notifications.data.length" class="text-gray-700 dark:text-gray-400">
-    <div v-for="notification in notifications.data" :key="notification.id" class="border-b border-gray-200 dark:border-gray-800 py-4 flex justify-between items-center">
+    <div
+      v-for="notification in notifications.data" :key="notification.id" class="border rounded-md mt-3 p-3 border-gray-200 dark:border-gray-800 flex justify-between items-center hover:bg-gray-800"
+      @mouseover="markAsRead(notification)"
+    >
       <div>
         <span v-if="notification.type === 'App\\Notifications\\OfferMade'">
           Offer <Price :price="notification.data.amount" /> for
@@ -44,7 +47,7 @@
 
   <section
     v-if="notifications.data.length"
-    class="w-full flex justify-center mt-8 mb-8"
+    class="w-full flex justify-center"
   >
     <Pagination :links="notifications.links" />
   </section>
@@ -54,8 +57,16 @@
 import Price from '@/Components/Price.vue'
 import EmptyState from '@/Components/UI/EmptyState.vue'
 import Pagination from '@/Components/UI/Pagination.vue'
-import { Link } from '@inertiajs/vue3'
+import { Link, router } from '@inertiajs/vue3'
 defineProps({
   notifications: Object,
 })
+
+function markAsRead(notification) {
+  if (!notification.read_at) {
+    router.put(route('notification.seen', notification), {}, {
+      preserveState: true,
+      preserveScroll: true})
+  }
+}
 </script>
