@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\NotificationMarkAsReadController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ListingOfferController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\RealtorListingAcceptOfferController;
 use App\Http\Controllers\RealtorListingController;
 use App\Http\Controllers\RealtorListingImageController;
@@ -27,6 +29,9 @@ Route::post('login', [LoginController::class, 'store'])->name('login.store');
 Route::delete('logout', [LoginController::class, 'destroy'])->name('logout');
 Route::get('register', [RegisterController::class, 'create'])->name('register');
 Route::post('register', [RegisterController::class, 'store'])->name('register.store');
+
+Route::resource('notification', NotificationController::class)->only(['index'])->middleware('auth');
+Route::put('notification/{notification}/seen', NotificationMarkAsReadController::class)->name('notification.seen')->middleware('auth');
 
 Route::resource('listing', ListingController::class)->only('index', 'show');
 Route::resource('listing.offer', ListingOfferController::class)->middleware('auth')->only(['store']);
