@@ -53,7 +53,7 @@ class RealtorListingController extends Controller
      */
     public function store(Request $request)
     {
-        Listing::create(
+        Listing::make(
             $request->validate([
                 'beds' => 'required|integer|min:0|max:255',
                 'baths' => 'required|integer|min:0|max:255',
@@ -64,7 +64,7 @@ class RealtorListingController extends Controller
                 'street_nr' => 'required|min:1|max:1000',
                 'price' => 'required|integer|min:1|max:4294967295',
             ])
-        );
+        )->owner()->associate($request->user())->save();
         return redirect()->route('realtor.listing.index')
             ->with('success', 'Listing was created!');
     }
