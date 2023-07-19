@@ -71,8 +71,8 @@
           </div>
         </div>
       </Box>
-      <div v-if="user.id !== listing.owner.id">
-        <MakeOffer v-if="user && !offerMade" :listing-id="listing.id" :price="listing.price" />
+      <div v-if="user && user.id !== listing.owner.id">
+        <MakeOffer v-if="user && !offerMade" :listing-id="listing.id" :price="listing.price" @offer-updated="offer = $event" />
         <OfferMade v-if="user && offerMade" :offer="offerMade" />
       </div>
     </div>
@@ -98,10 +98,11 @@ const props = defineProps({
   offerMade: Object,
 })
 
-let interest = ref(5)
-let duration = ref(20)
+const interest = ref(5)
+const duration = ref(20)
+const offer = ref(props.listing.price)
 
-const {monthlyPayment, totalPaid, totalInterest} = useMonthlyPayment(props.listing.price, interest, duration)
+const {monthlyPayment, totalPaid, totalInterest} = useMonthlyPayment(offer, interest, duration)
 
 
 </script>
