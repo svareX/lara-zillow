@@ -6,7 +6,7 @@
           <Link :href="route('listing.index')">Listings</Link>
         </div>
         <div class="text-xl text-indigo-600 dark:text-indigo-300 font-bold text-center">
-          <Link :href="route('listing.index')">House market</Link>
+          <Link :href="route('listing.index')">Lara-Zillow</Link>
         </div>
         <div v-if="user" class="flex items-center gap-4">
           <div class="text-gray-500 relative pr-2 py-2 text-lg">
