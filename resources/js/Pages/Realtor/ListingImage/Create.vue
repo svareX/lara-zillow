@@ -37,7 +37,11 @@
         class="flex flex-col justify-between"
       >
         <span>{{ listing.src }}</span>
-        <img :src="image.src" class="rounded-md" />
+        <img
+          :src="image.src" class="rounded-md hover:cursor-pointer"
+          @click="() => showImg(index)"
+        />
+        <vue-easy-lightbox :visible="visibleRef" :imgs="listing.images" :index="indexRef" @hide="onHide" />
         <Link
           :href="route('realtor.listing.image.destroy', { listing: props.listing.id, image: image.id })"
           method="delete"
@@ -52,7 +56,7 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import Box from '@/Components/UI/Box.vue'
 import { Link, useForm } from '@inertiajs/vue3'
 
@@ -77,4 +81,13 @@ const addFiles = (event) => {
   }
 }
 const reset = () => form.reset('images')
+
+const visibleRef = ref(false)
+const indexRef = ref(0)
+const showImg = (index) => {
+  indexRef.value = index
+  visibleRef.value = true
+}
+const onHide = () => visibleRef.value = false
+
 </script>

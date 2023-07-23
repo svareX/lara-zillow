@@ -22,6 +22,7 @@
     },
     "dependencies": {
         "@inertiajs/vue3": "^1.0.9",
-        "lodash": "^4.17.21"
+        "lodash": "^4.17.21",
+        "vue-easy-lightbox": "^1.16.0"
     }
 }

@@ -4,9 +4,11 @@
       <div class="grid grid-cols-2 gap-1">
         <img
           v-for="image in listing.images" :key="image.id"
-          :src="image.src"
+          :src="image.src" class="hover:cursor-pointer"
+          @click="() => showImg(index)"
         />
       </div>
+      <vue-easy-lightbox :visible="visibleRef" :imgs="listing.images" :index="indexRef" @hide="onHide" />
     </Box>
     <EmptyState v-else class="md:col-span-7 flex items-center">No images</EmptyState>
     <div class="md:col-span-5 flex flex-col gap-4">
@@ -103,6 +105,14 @@ const duration = ref(20)
 const offer = ref(props.listing.price)
 
 const {monthlyPayment, totalPaid, totalInterest} = useMonthlyPayment(offer, interest, duration)
+
+const visibleRef = ref(false)
+const indexRef = ref(0)
+const showImg = (index) => {
+  indexRef.value = index
+  visibleRef.value = true
+}
+const onHide = () => visibleRef.value = false
 
 
 </script>

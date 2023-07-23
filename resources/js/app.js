@@ -3,6 +3,7 @@ import { createApp, h } from 'vue'
 import { createInertiaApp } from '@inertiajs/vue3'
 import MainLayout from '@/Layouts/MainLayout.vue'
 import { ZiggyVue } from '/vendor/tightenco/ziggy/dist/vue.es'
+import VueEasyLightbox from 'vue-easy-lightbox'
 import '../css/app.css'
 
 createInertiaApp({
@@ -16,6 +17,7 @@ createInertiaApp({
     createApp({ render: () => h(App, props) })
       .use(plugin)
       .use(ZiggyVue)
+      .use(VueEasyLightbox)
       .mount(el)
   },
 })
