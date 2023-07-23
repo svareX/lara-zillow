@@ -17,9 +17,7 @@
               </div>
             </Link>
           </div>
-          <Link :href="route('realtor.listing.create')" class="btn-primary">New Listing</Link>
-          <Link :href="route('realtor.listing.index')" class="text-sm">{{ user.name }}</Link>
-          <Link :href="route('logout')" method="delete" as="button">Log out</Link>
+          <Dropdown :user="user" />
         </div>
         <div v-else>
           <Link :href="route('login')">Log in</Link>
@@ -39,6 +37,7 @@
 <script setup>
 import { computed } from 'vue'
 import { Link, usePage } from '@inertiajs/vue3'
+import Dropdown from '@/Components/Dropdown.vue'
 
 const page = usePage()
 const user = computed(
