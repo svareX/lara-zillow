@@ -17,9 +17,16 @@ First you need to clone the repository.
 
 Then install all the package and dependencies.
 
-    npm install
+    composer install
 
 After that you need to setup an .env file (use the .env.example as a template)
+
+    copy .env.example .env
+
+Generate a new application key
+
+    php artisan key:generate
+
 Create your database table.
 
     php artisan migrate
